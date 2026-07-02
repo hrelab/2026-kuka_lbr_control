@@ -21,6 +21,7 @@ cd docker
 ## Inside the container
 
 ```bash
+git submodule update --init --recursive
 colcon build --symlink-install
 source install/setup.bash
 ros2 launch kuka_control <launch_file>.py
