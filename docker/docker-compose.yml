@@ -1,30 +1,14 @@
 services:
   kuka_lbr_control:
     build:
-      context: ..
-      dockerfile: docker/Dockerfile
+      context: .
       args:
-        USER_NAME: ${USER:-ros}
+        USER_NAME: ${USER:-rosuser}
         USER_UID: ${USER_UID:-1000}
-    image: kuka_lbr_control:jazzy
-    container_name: kuka_lbr_control_jazzy
+        USER_GID: ${USER_GID:-1000}
     environment:
       DISPLAY: ${DISPLAY}
-      QT_X11_NO_MITSHM: "1"
-      ROS_DOMAIN_ID: ${ROS_DOMAIN_ID:-0}
-      RMW_IMPLEMENTATION: ${RMW_IMPLEMENTATION:-rmw_fastrtps_cpp}
-      TERM: xterm-256color
     network_mode: host
-    ipc: host
-    tty: true
     stdin_open: true
-    working_dir: /workspaces/kuka_lbr_control
-    volumes:
-      - ..:/workspaces/kuka_lbr_control:rw
-      - /tmp/.X11-unix:/tmp/.X11-unix:rw
-    cap_add:
-      - SYS_NICE
-    ulimits:
-      rtprio: 99
-      memlock: -1
+    tty: true
     command: bash
